@@ -1,5 +1,5 @@
-import { sum } from './server';
+import server from './server';
 
-console.log('Hello World!');
-
-console.log(sum(3, 5));
+server.listen(4000, () => {
+  console.log('Server is running on port 4000');
+});
