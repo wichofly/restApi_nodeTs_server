@@ -4,15 +4,28 @@ const server = express();
 
 // Route example
 server.get('/', (req, res) => {
-
-  const data = [
-    { id: 1, name: 'Juan' },
-    { id: 2, name: 'Pedro' },
-    { id: 3, name: 'Pablo' },
-  ];
-
   // res.json(data);
-  res.send(data);
+  res.send('from Get');
+});
+
+server.post('/', (req, res) => {
+  // res.json(data);
+  res.send('from Post');
+});
+
+server.put('/', (req, res) => {
+  // res.json(data);
+  res.send('from Put');
+});
+
+server.patch('/', (req, res) => {
+  // res.json(data);
+  res.send('from Patch');
+});
+
+server.delete('/', (req, res) => {
+  // res.json(data);
+  res.send('from Delete');
 });
 
 export default server;
