@@ -1,7 +1,7 @@
 import { Sequelize } from 'sequelize';
 import dotenv from 'dotenv';
 
-dotenv.config();
+dotenv.config({ quiet: true });
 
 const db = new Sequelize(process.env.DATABASE_URL!, {
   dialectOptions: {
@@ -20,7 +20,5 @@ export default db;
  * It uses SSL for secure connections, which is often required in production environments.
  * https://sequelize.org/docs/v6/getting-started/
  * -------------------------------------------------------------------------------
- * dotenv is used to load environment variables from a .env file. 
+ * dotenv is used to load environment variables from a .env file.
  */
-
-
