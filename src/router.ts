@@ -5,7 +5,7 @@ const router = Router();
 // Route example
 router.get('/', (req, res) => {
   // res.json(data);
-  res.send('from GetTt');
+  res.send('from Get');
 });
 
 router.post('/', (req, res) => {
