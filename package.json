@@ -52,6 +52,7 @@
     "readdirp": "^3.6.0",
     "semver": "^7.7.2",
     "sequelize": "^6.37.7",
+    "sequelize-typescript": "^2.1.6",
     "simple-update-notifier": "^2.0.0",
     "supports-color": "^5.5.0",
     "to-regex-range": "^5.0.1",

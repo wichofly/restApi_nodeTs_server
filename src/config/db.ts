@@ -1,4 +1,4 @@
-import { Sequelize } from 'sequelize';
+import { Sequelize } from 'sequelize-typescript';
 import dotenv from 'dotenv';
 
 dotenv.config({ quiet: true });
@@ -10,6 +10,7 @@ const db = new Sequelize(process.env.DATABASE_URL!, {
       rejectUnauthorized: false, // Allow self-signed certificates (Render usually requires this)
     },
   },
+  models: [__dirname + '/../models/**/*.ts'], // Path to models
 });
 
 export default db;
