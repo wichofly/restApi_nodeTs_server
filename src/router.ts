@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { body } from 'express-validator';
 
 import { createProduct } from './handlers/product';
+import { handleInputErrors } from './middleware';
 
 const router = Router();
 
@@ -24,6 +25,7 @@ router.post(
     .notEmpty()
     .withMessage('Price is required'),
 
+  handleInputErrors,
   createProduct
 );
 
