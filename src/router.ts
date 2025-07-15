@@ -1,4 +1,6 @@
 import { Router } from 'express';
+import { body } from 'express-validator';
+
 import { createProduct } from './handlers/product';
 
 const router = Router();
@@ -9,7 +11,21 @@ router.get('/', (req, res) => {
   res.send('from Get');
 });
 
-router.post('/', createProduct);
+router.post(
+  '/',
+
+  // Validation
+  body('name').notEmpty().withMessage('Name is required'),
+  body('price')
+    .isNumeric()
+    .withMessage('Price must be a number')
+    .custom((value) => value > 0)
+    .withMessage('Price must be greater than zero')
+    .notEmpty()
+    .withMessage('Price is required'),
+
+  createProduct
+);
 
 router.put('/', (req, res) => {
   // res.json(data);
