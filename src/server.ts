@@ -21,6 +21,8 @@ async function connectToDatabase() {
 
 connectToDatabase();
 
+server.use(express.json()); // Middleware to parse JSON bodies
+
 server.use('/api/products', router);
 
 export default server;
