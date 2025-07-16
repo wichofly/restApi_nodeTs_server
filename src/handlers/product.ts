@@ -70,7 +70,6 @@ export const updateAvailabilityWithPatch = async (
 
     // Update availability with the new data
     await product.update({ availability: !product.availability });
-
     res.send({ data: product });
   } catch (error) {
     console.error('Error updating product:', error);
