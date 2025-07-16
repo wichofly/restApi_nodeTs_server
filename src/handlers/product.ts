@@ -75,3 +75,19 @@ export const updateAvailabilityWithPatch = async (
     console.error('Error updating product:', error);
   }
 };
+
+export const deleteProduct = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const product = await Product.findByPk(id);
+
+    if (!product) {
+      return res.status(404).send({ error: 'Product not found' });
+    }
+
+    await product.destroy();
+    res.send({ data: `Product with ID-${id} deleted successfully` });
+  } catch (error) {
+    console.error('Error deleting product:', error);
+  }
+};

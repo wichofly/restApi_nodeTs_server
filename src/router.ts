@@ -3,6 +3,7 @@ import { body, param } from 'express-validator';
 
 import {
   createProduct,
+  deleteProduct,
   getProductById,
   getProducts,
   updateAvailabilityWithPatch,
@@ -40,9 +41,10 @@ router.post(
 );
 
 router.put(
-  '/:id', 
-  
+  '/:id',
+
   // Validation is used to update all columns in the model (name, price, availability).
+  param('id').isNumeric().withMessage('ID must be a number'),
   body('name').notEmpty().withMessage('Name is required'),
   body('price')
     .isNumeric()
@@ -59,11 +61,18 @@ router.put(
   updateProduct
 );
 
-router.patch('/:id', updateAvailabilityWithPatch);
+router.patch(
+  '/:id',
+  param('id').isNumeric().withMessage('ID must be a number'),
+  handleInputErrors,
+  updateAvailabilityWithPatch
+);
 
-router.delete('/', (req, res) => {
-  // res.json(data);
-  res.send('from Delete');
-});
+router.delete(
+  '/:id',
+  param('id').isNumeric().withMessage('ID must be a number'),
+  handleInputErrors,
+  deleteProduct
+);
 
 export default router;
