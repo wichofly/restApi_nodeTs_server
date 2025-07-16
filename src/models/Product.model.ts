@@ -8,20 +8,20 @@ class Product extends Model<Product> {
   @Column({
     type: DataType.STRING(100),
   })
-  name!: string;
+  declare name: string;
 
   @Column({
     type: DataType.FLOAT,
     allowNull: false,
   })
-  price!: number;
+  declare price: number;
 
   @Default(true)
   @Column({
     type: DataType.BOOLEAN,
     allowNull: false,
   })
-  availability!: number;
+  declare availability: number;
 }
 
 export default Product;
