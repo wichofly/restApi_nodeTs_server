@@ -49,7 +49,7 @@ export const updateProduct = async (req: Request, res: Response) => {
     }
 
     // Update the product with the new data
-    await product.update(req.body, { where: { id } });
+    await product.update(req.body);
     res.send({ data: product });
   } catch (error) {
     console.error('Error updating product:', error);
