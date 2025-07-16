@@ -5,6 +5,7 @@ import {
   createProduct,
   getProductById,
   getProducts,
+  updateAvailabilityWithPatch,
   updateProduct,
 } from './handlers/product';
 import { handleInputErrors } from './middleware';
@@ -58,10 +59,7 @@ router.put(
   updateProduct
 );
 
-router.patch('/', (req, res) => {
-  // res.json(data);
-  res.send('from Patch');
-});
+router.patch('/:id', updateAvailabilityWithPatch);
 
 router.delete('/', (req, res) => {
   // res.json(data);
