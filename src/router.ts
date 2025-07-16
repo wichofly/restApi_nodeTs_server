@@ -1,13 +1,20 @@
 import { Router } from 'express';
-import { body } from 'express-validator';
+import { body, param } from 'express-validator';
 
-import { createProduct, getProducts } from './handlers/product';
-import {  handleInputErrors } from './middleware';
+import { createProduct, getProductById, getProducts } from './handlers/product';
+import { handleInputErrors } from './middleware';
 
 const router = Router();
 
 // Route example
 router.get('/', getProducts);
+
+router.get(
+  '/:id',
+  param('id').isNumeric().withMessage('ID must be a number'),
+  handleInputErrors,
+  getProductById
+);
 
 router.post(
   '/',

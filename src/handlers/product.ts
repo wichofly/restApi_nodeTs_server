@@ -13,6 +13,22 @@ export const getProducts = async (req: Request, res: Response) => {
   }
 };
 
+export const getProductById = async (req: Request, res: Response) => {
+  try {
+    // console.log('Fetching product with ID', req.params.id);
+    const { id } = req.params;
+    const product = await Product.findByPk(id);
+
+    if (!product) {
+      return res.status(404).send({ error: 'Product not found' });
+    }
+
+    res.send({ data: product });
+  } catch (error) {
+    console.error('Error fetching product:', error);
+  }
+};
+
 export const createProduct = async (req: Request, res: Response) => {
   try {
     // Creates and saves the product in one step
