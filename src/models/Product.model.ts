@@ -21,7 +21,7 @@ class Product extends Model<Product> {
     type: DataType.BOOLEAN,
     allowNull: false,
   })
-  declare availability: number;
+  declare availability: boolean;
 }
 
 export default Product;
