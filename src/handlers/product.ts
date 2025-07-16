@@ -38,3 +38,20 @@ export const createProduct = async (req: Request, res: Response) => {
     console.error('Error creating product:', error);
   }
 };
+
+export const updateProduct = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const product = await Product.findByPk(id);
+
+    if (!product) {
+      return res.status(404).send({ error: 'Product not found' });
+    }
+
+    // Update the product with the new data
+    await product.update(req.body, { where: { id } });
+    res.send({ data: product });
+  } catch (error) {
+    console.error('Error updating product:', error);
+  }
+};

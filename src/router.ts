@@ -1,7 +1,12 @@
 import { Router } from 'express';
 import { body, param } from 'express-validator';
 
-import { createProduct, getProductById, getProducts } from './handlers/product';
+import {
+  createProduct,
+  getProductById,
+  getProducts,
+  updateProduct,
+} from './handlers/product';
 import { handleInputErrors } from './middleware';
 
 const router = Router();
@@ -33,10 +38,25 @@ router.post(
   createProduct
 );
 
-router.put('/', (req, res) => {
-  // res.json(data);
-  res.send('from Put');
-});
+router.put(
+  '/:id', 
+  
+  // Validation is used to update all columns in the model (name, price, availability).
+  body('name').notEmpty().withMessage('Name is required'),
+  body('price')
+    .isNumeric()
+    .withMessage('Price must be a number')
+    .custom((value) => value > 0)
+    .withMessage('Price must be greater than zero')
+    .notEmpty()
+    .withMessage('Price is required'),
+  body('availability')
+    .isBoolean()
+    .withMessage('Availability must be a boolean'),
+
+  handleInputErrors,
+  updateProduct
+);
 
 router.patch('/', (req, res) => {
   // res.json(data);
