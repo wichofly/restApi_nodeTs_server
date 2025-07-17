@@ -8,11 +8,11 @@ The API allows full CRUD operations on `Product` records, and includes request v
 
 - **Express**: Web framework used to handle routing and HTTP request logic.
 - **TypeScript**: Provides static typing and improved code safety.
-- **Sequelize**: ORM used to define models and interact with the PostgreSQL database.
-- **sequelize-typescript**: Adds decorator-based syntax for models (e.g. @Table, @Column).
+- **[Sequelize](https://sequelize.org/docs/v6/)**: ORM used to define models and interact with the PostgreSQL database.
+- **[sequelize-typescript](https://sequelize.org/docs/v7/models/data-types/)**: Adds decorator-based syntax for models (e.g. @Table, @Column).
 - **PostgreSQL**: The relational database, hosted on Render.
 - **dotenv**: Loads environment variables securely.
-- **express-validator**: Middleware to validate incoming request data.
+- **[express-validator](https://express-validator.github.io/docs/)**: Middleware to validate incoming request data.
 - **Thunder Client**: Used for testing endpoints inside VSCode.
 - **DBeaver**: GUI client used to visually inspect and manage the PostgreSQL database.
 
