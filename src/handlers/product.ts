@@ -33,7 +33,7 @@ export const createProduct = async (req: Request, res: Response) => {
   try {
     // Creates and saves the product in one step
     const product = await Product.create(req.body);
-    res.send({ data: product });
+    res.status(201).send({ data: product });
   } catch (error) {
     console.error('Error creating product:', error);
   }
