@@ -1,11 +1,15 @@
-describe('testing the first test', () => {
-  test(' 1 + 1 should equal 2', () => {
-    expect(1 + 3).toBe(4);
-  });
+import request from 'supertest';
+import server from '../server';
 
-  test('Not equal 3', () => {
-    expect(2 + 2).not.toBe(3);
-  } )
+describe('Server API Tests', () => {
+  it('should respond with a welcome message at /api', async () => {
+    const res = await request(server).get('/api');
+    expect(res.status).toBe(200);
+    expect(res.body.msg).toBe('Welcome to the API');
+
+    expect(res.status).not.toBe(404);
+    expect(res.body.msg).not.toBe('Not Found');
+  });
 });
 
 /**
