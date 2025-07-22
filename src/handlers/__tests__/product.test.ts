@@ -87,3 +87,71 @@ describe('GET /api/products/:id', () => {
     expect(res.body).toHaveProperty('data');
   });
 });
+
+describe('PUT /api/products/:id', () => {
+  it('should check a valid ID in the URL', async () => {
+    const res = await request(server).put('/api/products/not-valid-url').send({
+      name: 'FIFA 2026 PS4 - Game Test',
+      price: 120,
+      availability: true,
+    });
+    expect(res.status).toBe(400);
+    expect(res.body).toHaveProperty('errors');
+    expect(res.body.errors).toHaveLength(1);
+    expect(res.body.errors[0].msg).toBe('ID must be a number');
+  });
+
+  it('should display validation error message when updating a product', async () => {
+    const res = await request(server).put('/api/products/1').send({}); // Missing items
+    expect(res.status).toBe(400);
+    expect(res.body).toHaveProperty('errors');
+    expect(res.body.errors).toBeTruthy();
+    expect(res.body.errors).toHaveLength(5);
+
+    expect(res.status).not.toBe(200);
+    expect(res.body).not.toHaveProperty('data');
+  });
+
+  it('should display validation price greater than 0', async () => {
+    const res = await request(server).put('/api/products/1').send({
+      name: 'FIFA 2026 PS4 - Game Test',
+      price: 0,
+      availability: true,
+    }); // Missing items
+    expect(res.status).toBe(400);
+    expect(res.body).toHaveProperty('errors');
+    expect(res.body.errors).toBeTruthy();
+    expect(res.body.errors).toHaveLength(1);
+    expect(res.body.errors[0].msg).toBe('Price must be greater than zero');
+
+    expect(res.status).not.toBe(200);
+    expect(res.body).not.toHaveProperty('data');
+  });
+
+  it('should return a 404 response for a non-existent product', async () => {
+    const productId = 2000;
+    const res = await request(server).put(`/api/products/${productId}`).send({
+      name: 'FIFA 2026 PS4 - Game Test',
+      price: 120,
+      availability: true,
+    }); // Missing items
+    expect(res.status).toBe(404);
+    expect(res.body.error).toBe('Product not found');
+
+    expect(res.status).not.toBe(200);
+    expect(res.body).not.toHaveProperty('data');
+  });
+
+  it('should update an existing product with valid data', async () => {
+    const res = await request(server).put('/api/products/1').send({
+      name: 'FIFA 2026 PS4 - Game Test',
+      price: 120,
+      availability: true,
+    });
+    expect(res.status).toBe(200);
+    expect(res.body).toHaveProperty('data');
+
+    expect(res.status).not.toBe(400);
+    expect(res.body).not.toHaveProperty('errors');
+  });
+});
