@@ -47,3 +47,20 @@ describe('POST /api/products', () => {
     expect(res.body).not.toHaveProperty('errors');
   });
 });
+
+describe('GET /api/products', () => {
+  it('should check if api/products url exists', async () => {
+    const res = await request(server).get('/api/products');
+    expect(res.status).not.toBe(404);
+  });
+
+  it('should fetch all products', async () => {
+    const res = await request(server).get('/api/products');
+    expect(res.status).toBe(200);
+    // expect(res.headers['content-type']).toMatch(/json/);
+    expect(res.body.data).toHaveLength(1); // Assuming one product was created in the previous test
+
+    expect(res.status).not.toBe(404);
+    expect(res.body.data).not.toHaveProperty('errors');
+  });
+});
