@@ -6,7 +6,8 @@
   "scripts": {
     "start": "ts-node src/index.ts",
     "dev": "nodemon src/index.ts",
-    "test": "jest --detectOpenHandles"
+    "test": "jest --detectOpenHandles",
+    "db": "ts-node src/data/db.ts --clear"
   },
   "author": "Mauricio Erazo",
   "license": "ISC",
