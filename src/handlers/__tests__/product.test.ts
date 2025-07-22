@@ -64,3 +64,26 @@ describe('GET /api/products', () => {
     expect(res.body.data).not.toHaveProperty('errors');
   });
 });
+
+describe('GET /api/products/:id', () => {
+  it('should fetch a product by ID', async () => {
+    const productId = 2000;
+    const res = await request(server).get(`/api/products/${productId}`);
+    expect(res.status).toBe(404);
+    expect(res.body).toHaveProperty('error', 'Product not found');
+  });
+
+  it('should check a valid ID in the URL', async () => {
+    const res = await request(server).get('/api/products/not-valid-url');
+    expect(res.status).toBe(400);
+    expect(res.body).toHaveProperty('errors');
+    expect(res.body.errors).toHaveLength(1);
+    expect(res.body.errors[0].msg).toBe('ID must be a number');
+  });
+
+  it('get a response for a single product', async () => {
+    const res = await request(server).get('/api/products/1'); // Assuming product with ID 1 exists
+    expect(res.status).toBe(200);
+    expect(res.body).toHaveProperty('data');
+  });
+});
