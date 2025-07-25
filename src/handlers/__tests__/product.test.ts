@@ -156,6 +156,28 @@ describe('PUT /api/products/:id', () => {
   });
 });
 
+describe('PATCH /api/products/:id', () => {
+  it('should return a 404 response for non-existing product', async () => {
+    const productId = 2000;
+    const res = await request(server).patch(`/api/products/${productId}`);
+    expect(res.status).toBe(404);
+    expect(res.body).toHaveProperty('error', 'Product not found');
+
+    expect(res.status).not.toBe(200);
+  });
+
+  it('should update the product availability', async () => {
+    const res = await request(server).patch('/api/products/1'); // Assuming product with ID 1 exists
+    expect(res.status).toBe(200);
+    expect(res.body).toHaveProperty('data');
+    expect(res.body.data.availability).toBe(false); // Assuming the initial availability was true
+
+    expect(res.status).not.toBe(404);
+    expect(res.status).not.toBe(400);
+    expect(res.body).not.toHaveProperty('error');
+  });
+});
+
 describe('DELETE /api/products/:id', () => {
   it('should check a valid ID in the URL', async () => {
     const res = await request(server).delete('/api/products/not-valid-url');
@@ -180,7 +202,7 @@ describe('DELETE /api/products/:id', () => {
     expect(res.body).toHaveProperty('data');
 
     expect(res.status).not.toBe(404);
-        expect(res.status).not.toBe(400);
+    expect(res.status).not.toBe(400);
     expect(res.body).not.toHaveProperty('errors');
   });
 });
