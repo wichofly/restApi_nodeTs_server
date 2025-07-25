@@ -117,7 +117,7 @@ describe('PUT /api/products/:id', () => {
       name: 'FIFA 2026 PS4 - Game Test',
       price: 0,
       availability: true,
-    }); // Missing items
+    }); 
     expect(res.status).toBe(400);
     expect(res.body).toHaveProperty('errors');
     expect(res.body.errors).toBeTruthy();
