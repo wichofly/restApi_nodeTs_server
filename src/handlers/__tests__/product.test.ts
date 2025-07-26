@@ -1,5 +1,6 @@
 import request from 'supertest';
-import server from '../../server';
+import server, { connectToDatabase } from '../../server';
+import db from '../../config/db';
 
 describe('POST /api/products', () => {
   it('should display validation errors', async () => {
@@ -204,5 +205,29 @@ describe('DELETE /api/products/:id', () => {
     expect(res.status).not.toBe(404);
     expect(res.status).not.toBe(400);
     expect(res.body).not.toHaveProperty('errors');
+  });
+});
+
+jest.mock('../../config/db', () => {
+  const dbMock = {
+    authenticate: jest.fn(),
+    sync: jest.fn(),
+  };
+  return { __esModule: true, default: dbMock };
+});
+
+describe('connectToDatabase', () => {
+  it('should handle database connection error', async () => {
+    jest
+      .spyOn(db, 'authenticate')
+      .mockRejectedValueOnce(new Error('Unable to connect to the database:'));
+    const consoleSpy = jest.spyOn(console, 'log').mockImplementation();
+
+    await connectToDatabase();
+
+    expect(consoleSpy).toHaveBeenCalledWith(
+      expect.stringContaining('Unable to connect to the database:')
+    );
+    expect(db.authenticate).toHaveBeenCalled();
   });
 });

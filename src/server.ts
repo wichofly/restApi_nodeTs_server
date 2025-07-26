@@ -7,7 +7,7 @@ import db from './config/db';
 const server = express();
 
 // database connection
-async function connectToDatabase() {
+export async function connectToDatabase() {
   try {
     await db.authenticate();
     db.sync(); // Create new models and columns added to the database
@@ -15,7 +15,7 @@ async function connectToDatabase() {
     //   colors.blue('Database connection established successfully. ✅')
     // );
   } catch (error) {
-    console.error(colors.red.bold('Unable to connect to the database:'), error);
+    console.log(colors.red.bold('Unable to connect to the database:'), error);
   }
 }
 
