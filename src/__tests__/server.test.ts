@@ -1,5 +1,7 @@
 import request from 'supertest';
-import server from '../server';
+import server, { connectToDatabase } from '../server';
+
+connectToDatabase();
 
 describe('Server API Tests', () => {
   it('should respond with a welcome message at /api', async () => {
