@@ -13,9 +13,78 @@ import { handleInputErrors } from './middleware';
 
 const router = Router();
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Product:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: number
+ *           description: The unique identifier for the product.
+ *           example: 1
+ *         name:
+ *           type: string
+ *           description: The name of the product.
+ *           example: "Sample Product"
+ *         price:
+ *           type: number
+ *           description: The price of the product.
+ *           example: 19.99
+ *         availability:
+ *           type: boolean
+ *           description: The availability status of the product.
+ *           example: true
+ */
+
 // Route example
+
+/**
+ * @swagger
+ * /api/products:
+ *   get:
+ *     summary: Retrieve a list of products
+ *     tags: [Products]
+ *     description: Returns a list of all products in the database.
+ *     responses:
+ *       200:
+ *         description: Successful response.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Product'
+ */
 router.get('/', getProducts);
 
+/**
+ * @swagger
+ * /api/products/{id}:
+ *   get:
+ *     summary: Retrieve a product by ID
+ *     tags: [Products]
+ *     description: Returns a single product by its ID.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         description: The ID of the product to retrieve.
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Successful response with product data.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Product'
+ *       404:
+ *         description: Product not found.
+ *       400:
+ *        description: Bad Request - Invalid ID.
+ */
 router.get(
   '/:id',
   param('id').isNumeric().withMessage('ID must be a number'),
@@ -23,6 +92,36 @@ router.get(
   getProductById
 );
 
+/**
+ * @swagger
+ * /api/products:
+ *   post:
+ *     summary: Create a new product
+ *     tags: [Products]
+ *     description: Creates a new product in the database.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 example: "New Product"
+ *               price:
+ *                 type: number
+ *                 example: 29.99
+ *     responses:
+ *       201:
+ *         description: Product created successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Product'
+ *       400:
+ *        description: Bad Request - Invalid input data.
+ */
 router.post(
   '/',
 
@@ -40,6 +139,48 @@ router.post(
   createProduct
 );
 
+/**
+ * @swagger
+ * /api/products/{id}:
+ *   put:
+ *     summary: Update a product by ID
+ *     tags: [Products]
+ *     description: Updates an existing product by its ID.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         description: The ID of the product to update.
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 example: "Updated Product"
+ *               price:
+ *                 type: number
+ *                 example: 8.99
+ *               availability:
+ *                 type: boolean
+ *                 example: true
+ *     responses:
+ *       200:
+ *         description: Product updated successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Product'
+ *       400:
+ *         description: Bad Request - Invalid ID or Invalid input data.
+ *       404:
+ *         description: Product not found.
+ */
 router.put(
   '/:id',
 
@@ -61,6 +202,32 @@ router.put(
   updateProduct
 );
 
+/**
+ * @swagger
+ * /api/products/{id}:
+ *   patch:
+ *     summary: Update product availability by ID
+ *     tags: [Products]
+ *     description: Toggles the availability status of a product by its ID.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         description: The ID of the product to update availability.
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Product availability updated successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Product'
+ *       400:
+ *         description: Bad Request - Invalid ID.
+ *       404:
+ *         description: Product not found.
+ */
 router.patch(
   '/:id',
   param('id').isNumeric().withMessage('ID must be a number'),
@@ -68,6 +235,32 @@ router.patch(
   updateAvailabilityWithPatch
 );
 
+/**
+ * @swagger
+ * /api/products/{id}:
+ *   delete:
+ *     summary: Delete a product by ID
+ *     tags: [Products]
+ *     description: Deletes a product from the database by its ID.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         description: The ID of the product to delete.
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Product deleted successfully.
+ *         content:
+ *          application/json:
+ *           schema:
+ *             type: string
+ *       400:
+ *         description: Bad Request - Invalid ID.
+ *       404:
+ *         description: Product not found.
+ */
 router.delete(
   '/:id',
   param('id').isNumeric().withMessage('ID must be a number'),
