@@ -1,4 +1,5 @@
 import swaggerJSDoc from 'swagger-jsdoc';
+import { SwaggerUiOptions } from 'swagger-ui-express';
 
 const options: swaggerJSDoc.Options = {
   swaggerDefinition: {
@@ -20,4 +21,12 @@ const options: swaggerJSDoc.Options = {
 };
 
 const swaggerSpec = swaggerJSDoc(options);
+
+const swaggerUiOptions: SwaggerUiOptions = {
+  customCss: '.swagger-ui .topbar { display: none }', // Hide the top bar
+  customSiteTitle: 'Product API Documentation', // Custom title for the documentation page
+  explorer: true, // Enable the explorer feature
+};
+
 export default swaggerSpec;
+export { swaggerUiOptions };
