@@ -202,6 +202,32 @@ router.put(
   updateProduct
 );
 
+/**
+ * @swagger
+ * /api/products/{id}:
+ *   patch:
+ *     summary: Update product availability by ID
+ *     tags: [Products]
+ *     description: Toggles the availability status of a product by its ID.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         description: The ID of the product to update availability.
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Product availability updated successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Product'
+ *       400:
+ *         description: Bad Request - Invalid ID.
+ *       404:
+ *         description: Product not found.
+ */
 router.patch(
   '/:id',
   param('id').isNumeric().withMessage('ID must be a number'),
@@ -209,6 +235,32 @@ router.patch(
   updateAvailabilityWithPatch
 );
 
+/**
+ * @swagger
+ * /api/products/{id}:
+ *   delete:
+ *     summary: Delete a product by ID
+ *     tags: [Products]
+ *     description: Deletes a product from the database by its ID.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         description: The ID of the product to delete.
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Product deleted successfully.
+ *         content:
+ *          application/json:
+ *           schema:
+ *             type: string
+ *       400:
+ *         description: Bad Request - Invalid ID.
+ *       404:
+ *         description: Product not found.
+ */
 router.delete(
   '/:id',
   param('id').isNumeric().withMessage('ID must be a number'),
