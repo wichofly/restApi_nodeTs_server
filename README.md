@@ -31,3 +31,14 @@ The API allows full CRUD operations on `Product` records, and includes request v
 - Database connection is established on server startup with SSL enabled for Render.
 - `express.json()` middleware parses JSON request bodies.
 - Routes and handlers are separated into clean modules for scalability.
+
+---
+
+## 🧪 Testing
+
+The application includes an extensive automated test suite using:
+
+- **[Jest](https://jestjs.io/)**: JavaScript testing framework
+- **[Supertest](https://github.com/ladjs/supertest)**: For HTTP integration testing
+- **`jest.mock()`**: To isolate and mock database connections and errors
+- **`ts-jest`**: For running TypeScript code through Jest
