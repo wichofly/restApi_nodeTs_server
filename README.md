@@ -32,8 +32,6 @@ The API allows full CRUD operations on `Product` records, and includes request v
 - `express.json()` middleware parses JSON request bodies.
 - Routes and handlers are separated into clean modules for scalability.
 
----
-
 ## 🧪 Testing
 
 The application includes an extensive automated test suite using:
@@ -42,3 +40,15 @@ The application includes an extensive automated test suite using:
 - **[Supertest](https://github.com/ladjs/supertest)**: For HTTP integration testing
 - **`jest.mock()`**: To isolate and mock database connections and errors
 - **`ts-jest`**: For running TypeScript code through Jest
+
+## API Documentation with Swagger
+
+This project uses [Swagger UI](https://www.npmjs.com/package/swagger-ui-express) and [swagger-jsdoc](https://www.npmjs.com/package/swagger-jsdoc) to provide interactive API documentation.
+
+#### View Documentation
+
+Once the server is running, access the Swagger UI at:
+`http://localhost:5000/docs`
+
+- Swagger definitions are written using JSDoc comments directly in the Express routes `(src/router.ts)`
+- The configuration is generated using `swagger-jsdoc` and rendered with `swagger-ui-express`
