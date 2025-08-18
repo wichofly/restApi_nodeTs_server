@@ -40,7 +40,7 @@ server.use(cors(corsOptions));
 
 server.use(express.json()); // Middleware to parse JSON bodies
 
-server.use(morgan('dev'))
+server.use(morgan('dev'));
 
 server.use('/api/products', router);
 
