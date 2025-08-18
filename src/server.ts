@@ -1,5 +1,6 @@
 import express from 'express';
 import cors, { CorsOptions } from 'cors';
+import morgan from 'morgan';
 import colors from 'colors';
 import swaggerUi from 'swagger-ui-express';
 
@@ -38,6 +39,8 @@ const corsOptions: CorsOptions = {
 server.use(cors(corsOptions));
 
 server.use(express.json()); // Middleware to parse JSON bodies
+
+server.use(morgan('dev'))
 
 server.use('/api/products', router);
 
