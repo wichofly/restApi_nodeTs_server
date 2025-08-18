@@ -1,4 +1,5 @@
 import express from 'express';
+import cors, { CorsOptions } from 'cors';
 import colors from 'colors';
 import swaggerUi from 'swagger-ui-express';
 
@@ -22,6 +23,19 @@ export async function connectToDatabase() {
 }
 
 connectToDatabase();
+
+// Allowed connections
+const corsOptions: CorsOptions = {
+  origin: function (origin, callback) {
+    if (origin === process.env.FRONTEND_URL) {
+      callback(null, true);
+    } else {
+      callback(new Error('Error from CORS'));
+    }
+  },
+};
+
+server.use(cors(corsOptions));
 
 server.use(express.json()); // Middleware to parse JSON bodies
 
