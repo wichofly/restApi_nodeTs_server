@@ -4,7 +4,7 @@ import Product from '../models/Product.model';
 export const getProducts = async (req: Request, res: Response) => {
   const products = await Product.findAll({
     order: [['price', 'DESC']], // Order by price in descending order
-    attributes: { exclude: ['createdAt', 'updatedAt', 'availability'] }, // Exclude timestamps and availability from the response
+    attributes: { exclude: ['createdAt', 'updatedAt', ] }, // Exclude timestamps and availability from the response
   });
   res.send({ data: products });
 };
