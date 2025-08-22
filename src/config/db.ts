@@ -10,7 +10,7 @@ const db = new Sequelize(process.env.DATABASE_URL!, {
       rejectUnauthorized: false, // Allow self-signed certificates (Render usually requires this)
     },
   },
-  models: [__dirname + '/../models/**/*.ts'], // Path to models
+  models: [__dirname + '/../models/**/*'], // Path to models
   logging: false, // Disable logging; default: console.log
 });
 
