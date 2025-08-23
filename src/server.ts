@@ -45,7 +45,7 @@ server.use(morgan('dev'));
 server.use('/api/products', router);
 
 server.get('/api', (req, res) => {
-  res.send({ msg: 'Welcome to the API' });
+  res.send({ msg: 'Welcome to the Products API' });
 });
 
 server.use(
