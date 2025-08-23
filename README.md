@@ -8,7 +8,7 @@ The API allows full CRUD operations on `Product` records, and includes request v
 
 - **Express**: Web framework used to handle routing and HTTP request logic.
 - **TypeScript**: Provides static typing and improved code safety.
-- **[Sequelize](https://sequelize.org/docs/v6/)**: ORM used to define models and interact with the PostgreSQL database.
+- **[Sequelize](https://sequelize.org/docs/v6/)**: ORM (Object Relational Mapper) used to define models and interact with the PostgreSQL database.
 - **[sequelize-typescript](https://sequelize.org/docs/v7/models/data-types/)**: Adds decorator-based syntax for models (e.g. @Table, @Column).
 - **PostgreSQL**: The relational database, hosted on Render.
 - **dotenv**: Loads environment variables securely.
