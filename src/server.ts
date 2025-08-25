@@ -26,16 +26,17 @@ export async function connectToDatabase() {
 connectToDatabase();
 
 // Allowed connections
+const allowedOrigins = [process.env.FRONTEND_URL, 'http://localhost:5173'];
+
 const corsOptions: CorsOptions = {
   origin: function (origin, callback) {
-    if (origin === process.env.FRONTEND_URL) {
+    if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
       callback(new Error('Error from CORS'));
     }
   },
 };
-
 server.use(cors(corsOptions));
 
 server.use(express.json()); // Middleware to parse JSON bodies
