@@ -61,9 +61,10 @@ async function connectToDatabase() {
 }
 connectToDatabase();
 // Allowed connections
+const allowedOrigins = [process.env.FRONTEND_URL, 'http://localhost:5173'];
 const corsOptions = {
     origin: function (origin, callback) {
-        if (origin === process.env.FRONTEND_URL) {
+        if (!origin || allowedOrigins.includes(origin)) {
             callback(null, true);
         }
         else {
@@ -76,7 +77,7 @@ server.use(express_1.default.json()); // Middleware to parse JSON bodies
 server.use((0, morgan_1.default)('dev'));
 server.use('/api/products', router_1.default);
 server.get('/api', (req, res) => {
-    res.send({ msg: 'Welcome to the API' });
+    res.send({ msg: 'Welcome to the Products API' });
 });
 server.use('/docs', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swagger_1.default, swagger_1.swaggerUiOptions));
 exports.default = server;
