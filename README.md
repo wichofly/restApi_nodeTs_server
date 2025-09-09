@@ -48,9 +48,12 @@ This project uses [Swagger UI](https://www.npmjs.com/package/swagger-ui-express)
 #### View Documentation
 
 Once the server is running, access the Swagger UI at:
+
 ```
 http://localhost:5000/docs
 ```
+
+[API Documentation](https://rest-api-typescript-products-1.onrender.com/docs/)
 
 - Swagger definitions are written using JSDoc comments directly in the Express routes `(src/router.ts)`
 - The configuration is generated using `swagger-jsdoc` and rendered with `swagger-ui-express`
