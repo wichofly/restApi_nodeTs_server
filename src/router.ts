@@ -1,6 +1,9 @@
 import { Router } from 'express';
 import { body, param } from 'express-validator';
 
+import { login, register } from './handlers/auth';
+import { authUser } from './middleware/auth';
+
 import {
   createProduct,
   deleteProduct,
@@ -10,6 +13,15 @@ import {
   updateProduct,
 } from './handlers/product';
 import { handleInputErrors } from './middleware';
+
+export const authRouter = Router();
+
+// Auth routes
+authRouter.post('/register', register);
+authRouter.post('/login', login);
+authRouter.get('/protected', authUser, (req, res) =>
+  res.send({ msg: 'Secured data' })
+);
 
 const router = Router();
 
