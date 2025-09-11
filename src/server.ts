@@ -5,8 +5,11 @@ import colors from 'colors';
 import swaggerUi from 'swagger-ui-express';
 
 import swaggerSpec, { swaggerUiOptions } from './config/swagger';
-import router from './router';
+import router, { authRouter } from './router';
 import db from './config/db';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const server = express();
 
@@ -42,6 +45,8 @@ server.use(cors(corsOptions));
 server.use(express.json()); // Middleware to parse JSON bodies
 
 server.use(morgan('dev'));
+
+server.use('/api', authRouter);
 
 server.use('/api/products', router);
 
