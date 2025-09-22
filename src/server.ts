@@ -48,6 +48,11 @@ server.use(morgan('dev'));
 
 server.use('/api', authRouter);
 
+server.use((req, res, next) => {
+  console.log('Solicitud entrante:', req.method, req.url);
+  next();
+});
+
 server.use('/api/products', router);
 
 server.get('/api', (req, res) => {
@@ -59,5 +64,7 @@ server.use(
   swaggerUi.serve,
   swaggerUi.setup(swaggerSpec, swaggerUiOptions)
 );
+
+console.log('Servidor en ejecución. Rutas montadas en /api');
 
 export default server;
