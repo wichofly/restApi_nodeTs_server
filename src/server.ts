@@ -40,6 +40,7 @@ const corsOptions: CorsOptions = {
     }
   },
 };
+
 server.use(cors(corsOptions));
 
 server.use(express.json()); // Middleware to parse JSON bodies
@@ -47,11 +48,6 @@ server.use(express.json()); // Middleware to parse JSON bodies
 server.use(morgan('dev'));
 
 server.use('/api', authRouter);
-
-server.use((req, res, next) => {
-  console.log('Solicitud entrante:', req.method, req.url);
-  next();
-});
 
 server.use('/api/products', router);
 
@@ -64,7 +60,5 @@ server.use(
   swaggerUi.serve,
   swaggerUi.setup(swaggerSpec, swaggerUiOptions)
 );
-
-console.log('Servidor en ejecución. Rutas montadas en /api');
 
 export default server;
