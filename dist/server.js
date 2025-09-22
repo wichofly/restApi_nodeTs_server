@@ -43,8 +43,10 @@ const morgan_1 = __importDefault(require("morgan"));
 const colors_1 = __importDefault(require("colors"));
 const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
 const swagger_1 = __importStar(require("./config/swagger"));
-const router_1 = __importDefault(require("./router"));
+const router_1 = __importStar(require("./router"));
 const db_1 = __importDefault(require("./config/db"));
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
 const server = (0, express_1.default)();
 // database connection
 async function connectToDatabase() {
@@ -75,6 +77,7 @@ const corsOptions = {
 server.use((0, cors_1.default)(corsOptions));
 server.use(express_1.default.json()); // Middleware to parse JSON bodies
 server.use((0, morgan_1.default)('dev'));
+server.use('/api', router_1.authRouter);
 server.use('/api/products', router_1.default);
 server.get('/api', (req, res) => {
     res.send({ msg: 'Welcome to the Products API' });
