@@ -53,7 +53,7 @@ Once the server is running, access the Swagger UI at:
 http://localhost:5000/docs
 ```
 
-[API Documentation](https://rest-api-typescript-products-1.onrender.com/docs/)
+[API Documentation](https://restapi-nodets-server-products.onrender.com/docs/)
 
 - Swagger definitions are written using JSDoc comments directly in the Express routes `(src/router.ts)`
 - The configuration is generated using `swagger-jsdoc` and rendered with `swagger-ui-express`
