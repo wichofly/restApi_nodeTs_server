@@ -49,7 +49,7 @@ This project uses [Swagger UI](https://www.npmjs.com/package/swagger-ui-express)
 
 Once the server is running, access the Swagger UI at:
 
-```
+```ts
 http://localhost:5000/docs
 ```
 
