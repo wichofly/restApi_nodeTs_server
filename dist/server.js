@@ -48,6 +48,7 @@ const db_1 = __importDefault(require("./config/db"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const server = (0, express_1.default)();
+let databaseReady;
 // database connection
 async function connectToDatabase() {
     try {
@@ -56,12 +57,23 @@ async function connectToDatabase() {
         // console.log(
         //   colors.blue('Database connection established successfully. ✅')
         // );
+        return true;
     }
     catch (error) {
         console.log(colors_1.default.red.bold('Unable to connect to the database:'), error);
+        return false;
     }
 }
-connectToDatabase();
+function getDatabaseReady() {
+    if (!databaseReady) {
+        databaseReady = connectToDatabase().then((connected) => {
+            if (!connected)
+                databaseReady = undefined;
+            return connected;
+        });
+    }
+    return databaseReady;
+}
 // Allowed connections
 const allowedOrigins = [process.env.FRONTEND_URL, 'http://localhost:5173'];
 const corsOptions = {
@@ -77,6 +89,16 @@ const corsOptions = {
 server.use((0, cors_1.default)(corsOptions));
 server.use(express_1.default.json()); // Middleware to parse JSON bodies
 server.use((0, morgan_1.default)('dev'));
+// Netlify may handle a request immediately after a cold start. Wait for the
+// shared database initialization before allowing a route to query a model.
+server.use(async (_req, res, next) => {
+    const connected = await getDatabaseReady();
+    if (!connected) {
+        res.status(503).send({ error: 'Database is temporarily unavailable' });
+        return;
+    }
+    next();
+});
 server.use('/api', router_1.authRouter);
 server.use('/api/products', router_1.default);
 server.get('/api', (req, res) => {

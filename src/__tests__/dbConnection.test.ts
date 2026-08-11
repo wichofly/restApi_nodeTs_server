@@ -16,8 +16,9 @@ describe('connectToDatabase', () => {
       .mockRejectedValueOnce(new Error('Unable to connect to the database:'));
     const consoleSpy = jest.spyOn(console, 'log').mockImplementation();
 
-    await connectToDatabase();
+    const connected = await connectToDatabase();
 
+    expect(connected).toBe(false);
     expect(consoleSpy).toHaveBeenCalledWith(
       expect.stringContaining('Unable to connect to the database:'),
       expect.any(Error)
