@@ -4,7 +4,8 @@
 
 [functions]
   node_bundler = "esbuild"
-  external_node_modules = ["express", "pg"]
+  external_node_modules = ["express", "pg", "swagger-ui-express", "swagger-ui-dist"]
+  included_files = ["src/router.ts"]
 
 [[redirects]]
   from = "/"
@@ -27,5 +28,11 @@
 [[redirects]]
   from = "/docs/*"
   to = "/.netlify/functions/api/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/openapi.json"
+  to = "/.netlify/functions/api/openapi.json"
   status = 200
   force = true

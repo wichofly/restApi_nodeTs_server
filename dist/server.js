@@ -104,5 +104,8 @@ server.use('/api/products', router_1.default);
 server.get('/api', (req, res) => {
     res.send({ msg: 'Welcome to the Products API' });
 });
+server.get('/openapi.json', (_req, res) => {
+    res.json(swagger_1.default);
+});
 server.use('/docs', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swagger_1.default, swagger_1.swaggerUiOptions));
 exports.default = server;

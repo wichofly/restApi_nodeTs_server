@@ -81,6 +81,10 @@ server.get('/api', (req, res) => {
   res.send({ msg: 'Welcome to the Products API' });
 });
 
+server.get('/openapi.json', (_req, res) => {
+  res.json(swaggerSpec);
+});
+
 server.use(
   '/docs',
   swaggerUi.serve,
