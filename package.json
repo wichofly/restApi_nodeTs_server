@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "description": "REST API's with Express and TypeScript",
   "main": "index.ts",
+  "engines": {
+    "node": "22.x"
+  },
   "scripts": {
     "start": "node dist/index.js",
     "dev": "nodemon src/index.ts",
-    "build": "npx tsc",
+    "build": "node ./node_modules/typescript/bin/tsc",
     "test": "jest --detectOpenHandles",
     "test:coverage": "npm run pretest && jest --detectOpenHandles --coverage",
     "pretest": "ts-node src/data/db.ts --clear"
