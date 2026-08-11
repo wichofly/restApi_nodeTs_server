@@ -1,5 +1,7 @@
 import { Sequelize } from 'sequelize-typescript';
 import dotenv from 'dotenv';
+import Product from '../models/Product.model';
+import User from '../models/User.model';
 
 dotenv.config({ quiet: true });
 
@@ -10,7 +12,8 @@ const db = new Sequelize(process.env.DATABASE_URL!, {
       rejectUnauthorized: false, // Allow self-signed certificates (Render usually requires this)
     },
   },
-  models: [__dirname + '/../models/**/*'], // Path to models
+  // Source-file globs are unavailable inside the bundled Netlify Function.
+  models: [Product, User],
   logging: false, // Disable logging; default: console.log
 });
 

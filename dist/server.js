@@ -52,7 +52,7 @@ const server = (0, express_1.default)();
 async function connectToDatabase() {
     try {
         await db_1.default.authenticate();
-        db_1.default.sync(); // Create new models and columns added to the database
+        await db_1.default.sync(); // Create new models and columns added to the database
         // console.log(
         //   colors.blue('Database connection established successfully. ✅')
         // );

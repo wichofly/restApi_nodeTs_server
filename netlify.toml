@@ -2,17 +2,30 @@
   command = "npm run build"
   functions = "netlify/functions"
 
+[functions]
+  node_bundler = "esbuild"
+  external_node_modules = ["express", "pg"]
+
+[[redirects]]
+  from = "/"
+  to = "/api"
+  status = 302
+  force = true
+
 [[redirects]]
   from = "/api"
-  to = "/.netlify/functions/api/api"
+  to = "/.netlify/functions/api"
   status = 200
+  force = true
 
 [[redirects]]
   from = "/api/*"
-  to = "/.netlify/functions/api/api/:splat"
+  to = "/.netlify/functions/api/:splat"
   status = 200
+  force = true
 
 [[redirects]]
   from = "/docs/*"
-  to = "/.netlify/functions/api/docs/:splat"
+  to = "/.netlify/functions/api/:splat"
   status = 200
+  force = true
