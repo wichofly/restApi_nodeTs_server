@@ -1,6 +1,7 @@
+import { expect } from '@jest/globals';
+import { describe, it } from 'node:test';
 import request from 'supertest';
 import server from '../../server';
-import { describe, it } from 'node:test';
 
 describe('POST /api/products', () => {
   it('should display validation errors', async () => {
