@@ -1,13 +1,13 @@
-import express from 'express';
-import cors, { CorsOptions } from 'cors';
-import morgan from 'morgan';
 import colors from 'colors';
+import cors, { CorsOptions } from 'cors';
+import express from 'express';
+import morgan from 'morgan';
 import swaggerUi from 'swagger-ui-express';
 
+import dotenv from 'dotenv';
+import db from './config/db';
 import swaggerSpec, { swaggerUiOptions } from './config/swagger';
 import router, { authRouter } from './router';
-import db from './config/db';
-import dotenv from 'dotenv';
 
 dotenv.config();
 
